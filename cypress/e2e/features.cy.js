@@ -1,46 +1,48 @@
-import { website } from "../../pageObjects/pageobjectlogin"
+import { website } from "../../pageObjects/pageobjectwebsite"
+
 describe('website', () => {
   beforeEach(() => {
-    cy.visit(website.homePage)
-  })
-  it('logs in as standard user', () => {
-    website.logIn(website.standardUser,website.pwd)
-  })
+    cy.visit(website.homePage);
+  });
 
-  it('doesnt login as locked-out user', () => {
-    website.logIn(website.lockedUser,website.pwd)
+  it('logs in as standard user', () => {
+    website.logIn(website.standardUser,website.password);
+  });
+
+  it('doesn\'t login as locked-out user', () => {
+    website.logIn(website.lockedUser,website.password);
     cy.get(website.lockedOutUserElement).should('contain',website.lockedOutUserMessage);
-  })
-})
+  });
+});
 
 describe('products page', () => {
   beforeEach(() => {
-    cy.visit(website.homePage)
-  })
-  it('sorts products alphabatically ascending by default', () => {
-    website.logIn(website.standardUser,website.pwd)
-    website.checkIfSortedAscByDefault()
-    
-  })
-  it('sorts products alphabatically ascending on click', () => {
-    website.logIn(website.standardUser,website.pwd)
-    website.checkIfSortedAscOnClick()
-    
-  })
-  it('sorts products alphabatically descending on click', () => {
-    website.logIn(website.standardUser,website.pwd)
-    website.checkIfSortedDescOnClick()
-    
-  })
-  it('sorts products by price Ascending by default', () => {
-    website.logIn(website.standardUser,website.pwd)
-    website.checkIfSortedByPriceAsc()
-    
-  })
-  it('sorts products by price descending on click', () => {
-    website.logIn(website.standardUser,website.pwd)
-    website.checkIfSortedDesc()
-    
-  })
+    cy.visit(website.homePage);
+    website.logIn(website.standardUser,website.password);
+  });
+
+  it('sorts products alphabetically ascending by default', () => {
+    website.checkSort();
+  });
+
+  it('sorts products alphabetically ascending on click', () => {
+    cy.get(website.sortListButton).select(website.ascending)
+    website.checkSort(false,false);
+  });
+
+  it('sorts products alphabetically descending on click', () => {
+    cy.get(website.sortListButton).select(website.descending)
+    website.checkSort(false,true);
+  });
+
+  it('sorts products by price Ascending on click', () => {
+    cy.get(website.sortListButton).select(website.fromLowToHigh)
+    website.checkSort(true,false);
+  });
+
+  it('sorts products by price Descending on click', () => {
+    cy.get(website.sortListButton).select(website.fromHighToLow)
+    website.checkSort(true,true);
+  });
   
-})
+});
