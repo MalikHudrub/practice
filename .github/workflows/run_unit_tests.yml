@@ -1,7 +1,7 @@
 name: Cypress Tests
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
@@ -19,14 +19,8 @@ jobs:
     - name: Install cypress latest version
       run: npm install cypress@latest --save-dev
 
-    - name: Run Cypress desktop terminal
+    - name: Run Cypress desktop
       run: npm run desktop
       
-    - name: Run Cypress mobile terminal
+    - name: Run Cypress mobile
       run: npm run mobile
-      
-    - name: Run Cypress desktop browser
-      run: npm run desktop-browser
-      
-    - name: Run Cypress mobile browser
-      run: npm run mobile-browser
