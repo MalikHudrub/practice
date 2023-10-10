@@ -19,5 +19,14 @@ jobs:
     - name: Install cypress latest version
       run: npm install cypress@latest --save-dev
 
-    - name: Run Cypress tests
+    - name: Run Cypress desktop terminal
       run: npm run desktop
+      
+    - name: Run Cypress mobile terminal
+      run: npm run mobile
+      
+    - name: Run Cypress desktop browser
+      run: npm run desktop-browser
+      
+    - name: Run Cypress mobile browser
+      run: npm run mobile-browser
