@@ -1,16 +1,20 @@
-name: run unit tests of feature branches
+name: Cypress Tests
 
 on:
   push:
     branches:
-      'v*'
-jobs:
-  run_unit_tests:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: checkout
-        uses: actions/checkout@v.3.3.0
+      - main
 
-      - name: run unit test
-        run: mvn test
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress tests
+      run: npm run desktop
