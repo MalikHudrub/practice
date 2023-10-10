@@ -4,7 +4,11 @@
   "description": "",
   "main": "cypress.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mobile": "cypress run --config userAgent=mobile",
+    "desktop": "cypress run --config userAgent=desktop",
+    "mobile-browser": "npx cypress open --config userAgent=mobile",
+    "desktop-browser": "npx cypress open --config userAgent=desktop"
   },
   "author": "",
   "license": "ISC",
