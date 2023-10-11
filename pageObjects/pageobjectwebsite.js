@@ -29,9 +29,9 @@ class Website {
      * 
      */
     logIn(username, password) {
-        cy.get(this.usernameInput).type(username)
-        cy.get(this.passwordInput).type(password)
-        cy.get(website.loginButton).click()
+        cy.get(this.usernameInput).type(username);
+        cy.get(this.passwordInput).type(password);
+        cy.get(website.loginButton).click();
     }
 
      /**
@@ -43,7 +43,7 @@ class Website {
     checkSort( byPrice = false, descending = false) {
         const allProducts = []
         cy.get(byPrice ? this.itemPrice :this.itemName ).each((products) => {
-            allProducts.push(products.text().trim())
+            allProducts.push(products.text().trim());
         }).then(() => {
             const tempProducts = [...allProducts]
             expect(allProducts).to.deep.equal(tempProducts.sort( descending ? ((a, b) => b - a ): ((a, b) => a - b )));
